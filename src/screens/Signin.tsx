@@ -4,6 +4,7 @@ import { Envelope, Key } from 'phosphor-react-native';
 import Logo from '../assets/logo_primary.svg';
 import { Button } from '../components/Button';
 import { useState } from 'react';
+import { Alert } from 'react-native';
 
 export function Signin() {
   const [email, setEmail] = useState('');
@@ -11,7 +12,9 @@ export function Signin() {
   const { colors } = useTheme();
 
   function handleSignin() {
-    alert(email);
+    if (!email || !password) {
+      return Alert.alert('Login', 'Insira seu usuário corretamente');
+    }
   }
   return (
     <VStack flex={1} alignItems="center" bg="gray.600" px={8} pt={24}>
@@ -20,7 +23,6 @@ export function Signin() {
         Acesse sua conta
       </Heading>
       <Input
-        value={email}
         placeholder="E-mail"
         mb={4}
         onChangeText={setEmail}
@@ -29,7 +31,6 @@ export function Signin() {
         }
       />
       <Input
-        value={password}
         secureTextEntry
         placeholder="Senha"
         mb={8}
